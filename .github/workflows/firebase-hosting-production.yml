@@ -1,0 +1,63 @@
+name: Deploy to Firebase hosting
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: _cache_npm_node14
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Transpile
+        run: |
+          npm run build
+        env:
+          NEXT_APP_FIREBASE_KEY: ${{ secrets.NEXT_APP_FIREBASE_KEY }}
+          NEXT_APP_FIREBASE_DOMAIN: ${{ secrets.NEXT_APP_FIREBASE_DOMAIN }}
+          NEXT_APP_FIREBASE_DATABASE: ${{ secrets.NEXT_APP_FIREBASE_DATABASE }}
+          NEXT_APP_FIREBASE_PROJECT_ID: ${{ secrets.NEXT_APP_FIREBASE_PROJECT_ID }}
+          NEXT_APP_FIREBASE_STORAGE_BUCKET: ${{ secrets.NEXT_APP_FIREBASE_STORAGE_BUCKET }}
+          NEXT_APP_FIREBASE_SENDER_ID: ${{ secrets.NEXT_APP_FIREBASE_SENDER_ID }}
+
+      - name: Export
+        run: |
+          npm run export
+
+      - name: Deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_LIFF }}"
+          projectId: nextjs-liff
+          channelId: live
+        env:
+          FIREBASE_CLI_PREVIEWS: hostingchannels
