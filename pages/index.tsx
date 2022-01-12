@@ -1,9 +1,8 @@
 import React from 'react'
-import { auth } from '../plugins/firebase'
-import { SignInButton } from '../components/SignInButton'
-import { SignOutButton } from '../components/SignOutButton'
 
-export default function Home() {
+export default function Home(props) {
+  const { liff, profileName } = props
+
   return (
     <>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -15,7 +14,7 @@ export default function Home() {
               alt="nekohack logo"
             />
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              {!auth.currentUser ? (
+              {!liff?.isLoggedIn() ? (
                 <>{'Sign in to your account'}</>
               ) : (
                 <>{'You are signed to your account'}</>
@@ -31,7 +30,7 @@ export default function Home() {
             </p>
           </div>
           <form className="mt-8 space-y-6" action="#" method="POST">
-            <div>{!auth.currentUser ? <SignInButton /> : <SignOutButton />}</div>
+            <div>{liff?.isLoggedIn() && <>{`${profileName} (${liff?.getVersion()})`}</>}</div>
           </form>
         </div>
       </div>
