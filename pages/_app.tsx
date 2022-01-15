@@ -8,6 +8,8 @@ const MyApp = ({ Component, pageProps }) => {
 
   const [profileName, setProfileName] = useState<string>('')
 
+  const [pictureUrl, setPictureUrl] = useState<string>('')
+
   useEffect(() => {
     import('@line/liff').then((liff: any) => {
       liff
@@ -21,6 +23,7 @@ const MyApp = ({ Component, pageProps }) => {
             .getProfile()
             .then((profile: any) => {
               setProfileName(profile.displayName)
+              setPictureUrl(profile.pictureUrl)
             })
             .catch((err: any) => {
               console.error({ err })
@@ -34,6 +37,7 @@ const MyApp = ({ Component, pageProps }) => {
 
   pageProps.liff = liffObject
   pageProps.profileName = profileName
+  pageProps.pictureUrl = pictureUrl
 
   return (
     <>
