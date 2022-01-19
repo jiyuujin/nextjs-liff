@@ -1,7 +1,17 @@
 import React from 'react'
+import { SendMessagesButton } from '../components/SendMessagesButton'
 
 export default function Home(props) {
   const { liff, profileName, pictureUrl } = props
+
+  const sendMessages = async () => {
+    await liff.sendMessages([
+      {
+        type: 'text',
+        text: 'Hello World',
+      },
+    ])
+  }
 
   return (
     <>
@@ -17,6 +27,9 @@ export default function Home(props) {
               ) : (
                 <>{'You are signed to your account'}</>
               )}
+            </h2>
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+              {liff?.isLoggedIn() && <SendMessagesButton sendMessages={sendMessages} />}
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               <a
