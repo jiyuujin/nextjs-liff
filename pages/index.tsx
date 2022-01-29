@@ -5,12 +5,8 @@ export default function Home(props) {
   const { liff, profileName, pictureUrl } = props
 
   const sendMessages = async () => {
-    await liff.sendMessages([
-      {
-        type: 'text',
-        text: 'Hello World',
-      },
-    ])
+    const messages = [{ type: 'text', text: 'Hello World' }]
+    liff.isInClient() ? liff.sendMessages(messages) : liff.shareTargetPicker(messages)
   }
 
   return (
