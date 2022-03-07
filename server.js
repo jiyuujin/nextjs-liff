@@ -18,13 +18,13 @@ const handle = app.getRequestHandler()
   expressApp.get('*', (req, res) => handle(req, res))
 
   const hasCertificates =
-    fs.existsSync('./certificates/localhost.key') && fs.existsSync('./certificates/localhost.crt')
+    fs.existsSync('./certificates/localhost-key.pem') && fs.existsSync('./certificates/localhost.pem')
   const useHttps = process.env.HTTPS === 'true' && hasCertificates
 
   if (useHttps) {
     const options = {
-      cert: fs.readFileSync('./certificates/localhost.crt'),
-      key: fs.readFileSync('./certificates/localhost.key'),
+      cert: fs.readFileSync('./certificates/localhost.pem'),
+      key: fs.readFileSync('./certificates/localhost-key.pem'),
     }
 
     const server = https.createServer(options, expressApp)
