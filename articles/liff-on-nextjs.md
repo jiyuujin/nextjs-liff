@@ -3,7 +3,8 @@ title: 'もし LIFF アプリを Next.js で作っていたなら'
 emoji: '🥷'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['zenn', 'nextjs', 'react', 'liff', 'line'] # 5 つまで
-published: false # 下書きは false
+publish-on: 2022-04-18
+published: true # 下書きは false
 ---
 
 # 前置き
