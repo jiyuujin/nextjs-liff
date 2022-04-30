@@ -1,5 +1,5 @@
 ---
-title: 'もし LIFF アプリを Next.js で作っていたなら'
+title: 'LIFF アプリを Next.js で動作させよう'
 emoji: '🥷'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['zenn', 'nextjs', 'react', 'liff', 'line'] # 5 つまで
