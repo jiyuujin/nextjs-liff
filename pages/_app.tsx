@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 
-import '../static/globals.css'
+import '../styles/globals.css'
 
 const MyApp = ({ Component, pageProps }) => {
   const [liffObject, setLiffObject] = useState<any>(null)
