@@ -1,14 +1,13 @@
 import React from 'react'
-import { signIn } from '../plugins/firebase'
 
-export const SignInButton = () => {
-  const handleClick = () => {
-    signIn()
-  }
+interface SignInButtonProps {
+  login: () => void
+}
 
+export const SignInButton = ({ login }: SignInButtonProps) => {
   return (
     <button
-      onClick={handleClick}
+      onClick={login}
       type="button"
       className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
     >
