@@ -473,7 +473,7 @@ tree コマンドを利用して、ファイル構成を示します。
 
 - TypeScript で書くため `tsconfig.json` が必要
 - Next.js で設定をカスタマイズするため `next.config.js` が必要
-- LINE ユーザ情報を保持するため `lib` が必要
+- (Google 認証する場合) Firebase ユーザ情報を保持するため `lib` が必要
 - (ローカル環境で開発する場合) オレオレ証明書 (`certificates`) が必要
 
 なお、ファイル構成は特異なものを採用していません。
@@ -505,9 +505,6 @@ tree コマンドを利用して、ファイル構成を示します。
 │    │    ├── SendMessagesButton.tsx
 │    │    ├── SignInButton.tsx
 │    │    └── SignOutButton.tsx
-│    ├── lib
-│    │    ├── AuthContext.tsx
-│    │    └── AuthReducer.tsx
 │    ├── pages
 │    │    ├── _app.tsx
 │    │    ├── _document.tsx
